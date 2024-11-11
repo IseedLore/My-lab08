@@ -1,8 +1,13 @@
 package it.unibo.mvc;
 
+import javax.print.attribute.standard.JobName;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -81,7 +86,26 @@ public class MiniGUI {
      *            ignored
      */
     public static void main(final String... args) {
-        new MiniGUI().display();
+        // new MiniGUI().display();        
+
+        MiniGUI gui = new MiniGUI();
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, 0));
+        panel.setBorder(new TitledBorder("Panel"));
+        JButton Button = new JButton("Randon number");
+        panel.add(Button);
+        JLabel Result =  new JLabel("Result");
+        Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                int tmp = gui.randomGenerator.nextInt();
+                System.out.println(tmp);
+                Result.setText("Result " + tmp);
+            }
+        });
+        gui.frame.getContentPane().add(panel, BorderLayout.CENTER);
+        gui.frame.getContentPane().add(Result, BorderLayout.NORTH);
+        gui.display();
     }
 
 }
